@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+
+  navqplusbuilder:
+
+    environment:
+      - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "50m"
+    image: ${REGISTRY}/rudislabs/navqplusbuilder:${TAG}
+    build:
+      dockerfile: Dockerfile
+    tty: true
+    stdin_open: true
+    privileged: true
+    hostname: navqplusbuilder
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    volumes:
+      - ./work:/home/user/work
+      - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
+      - $HOME/gnupg:/home/user/.gnupg
+      - $HOME/.ssh:/home/user/.ssh
+      - $HOME/.gitconfig:/home/user/.gitconfig
