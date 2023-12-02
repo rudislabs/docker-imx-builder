@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 LABEL maintainer="Benjamin Perseghetti <bperseghetti@rudislabs.com>"
 
 # environment
@@ -32,15 +32,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && \
 		libbz2-dev \
 		libusb-1.0.0-dev \
 		libz-dev \
-		python \
-		python2.7 \
 		python3 \
 		python3-pip \
 		python3-pexpect \
+		python-is-python3 \
 		socat \
 		texinfo \
 		unzip \
-		xz-utils
+		xz-utils \
+		libgnutls28-dev \
+		efitools \
+		git-lfs
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && \
 	apt-get -y upgrade && \
